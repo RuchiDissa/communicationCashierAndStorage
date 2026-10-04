@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Ruchira Communication - Shop Manager</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                R
+            </div>
+
+            <div class="brand-text">
+
+                <h2>Ruchira</h2>
+
+                <span>Communication</span>
+
+            </div>
+
+        </div>
+
+
+        <nav class="navigation">
+
+            <button
+                class="nav-item active"
+                data-section="dashboard"
+            >
+
+                <span class="nav-icon">▦</span>
+
+                <span data-i18n="dashboard">
+                    Dashboard
+                </span>
+
+            </button>
+
+
+            <button
+                class="nav-item"
+                data-section="products"
+            >
+
+                <span class="nav-icon">📦</span>
+
+                <span data-i18n="products">
+                    Products
+                </span>
+
+            </button>
+
+
+            <button
+                class="nav-item"
+                data-section="sales"
+            >
+
+                <span class="nav-icon">🛒</span>
+
+                <span data-i18n="cashier">
+                    Cashier
+                </span>
+
+            </button>
+
+
+            <button
+                class="nav-item"
+                data-section="history"
+            >
+
+                <span class="nav-icon">📋</span>
+
+                <span data-i18n="salesHistory">
+                    Sales History
+                </span>
+
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <div data-i18n="shopManager">
+                Shop Manager
+            </div>
+
+            <small data-i18n="localInventory">
+                Local inventory system
+            </small>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="main">
+
+
+        <!-- =================================================
+             TOP BAR
+             ================================================= -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1 id="pageTitle">
+                    Dashboard
+                </h1>
+
+                <p id="pageSubtitle">
+                    Overview of your shop
+                </p>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+                <!-- LANGUAGE -->
+
+                <div class="language-switcher">
+
+                    <span class="language-icon">
+                        🌐
+                    </span>
+
+                    <select id="languageSelect">
+
+                        <option value="en">
+                            English
+                        </option>
+
+                        <option value="si">
+                            සිංහල
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- DATE -->
+
+                <div class="top-date">
+
+                    <span id="currentDate"></span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             DASHBOARD
+             ================================================= -->
+
+        <section
+            id="dashboard"
+            class="page active"
+        >
+
+
+            <div class="stats-grid">
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+                        📦
+                    </div>
+
+                    <div>
+
+                        <span data-i18n="totalProducts">
+                            Total Products
+                        </span>
+
+                        <strong id="totalProducts">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon green">
+                        📊
+                    </div>
+
+                    <div>
+
+                        <span data-i18n="totalStock">
+                            Total Stock
+                        </span>
+
+                        <strong id="totalStock">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon orange">
+                        🛒
+                    </div>
+
+                    <div>
+
+                        <span data-i18n="todaysSales">
+                            Today's Sales
+                        </span>
+
+                        <strong id="todaySales">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon purple">
+                        💰
+                    </div>
+
+                    <div>
+
+                        <span data-i18n="todaysRevenue">
+                            Today's Revenue
+                        </span>
+
+                        <strong id="todayRevenue">
+                            Rs. 0.00
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="dashboard-grid">
+
+
+                <!-- LOW STOCK -->
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h2 data-i18n="lowStock">
+                                Low Stock
+                            </h2>
+
+                            <p data-i18n="productsNeedAttention">
+                                Products that need attention
+                            </p>
+
+                        </div>
+
+                        <button
+                            class="text-button"
+                            onclick="showSection('products')"
+                            data-i18n="viewProducts"
+                        >
+                            View Products
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="lowStockList"
+                        class="list-container"
+                    ></div>
+
+                </div>
+
+
+
+                <!-- RECENT SALES -->
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h2 data-i18n="recentSales">
+                                Recent Sales
+                            </h2>
+
+                            <p data-i18n="latestTransactions">
+                                Latest transactions
+                            </p>
+
+                        </div>
+
+                        <button
+                            class="text-button"
+                            onclick="showSection('history')"
+                            data-i18n="viewHistory"
+                        >
+                            View History
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="recentSalesList"
+                        class="list-container"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PRODUCTS
+             ================================================= -->
+
+        <section
+            id="products"
+            class="page"
+        >
+
+
+            <div class="content-grid">
+
+
+                <!-- PRODUCT FORM -->
+
+                <div class="card form-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h2 id="productFormTitle"
+                                data-i18n="addProduct">
+                                Add Product
+                            </h2>
+
+                            <p id="productFormSubtitle"
+                               data-i18n="addItemsStorage">
+                                Add items to your storage
+                            </p>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            id="cancelEditButton"
+                            class="cancel-edit-button hidden"
+                            data-i18n="cancel"
+                        >
+                            Cancel
+                        </button>
+
+                    </div>
+
+
+                    <form id="productForm">
+
+
+                        <div class="form-group">
+
+                            <label data-i18n="productName">
+                                Product Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="productName"
+                                placeholder="USB Cable"
+                                data-placeholder="productNamePlaceholder"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+
+                                <label data-i18n="productCode">
+                                    Product Code
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="productCode"
+                                    placeholder="USB001"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label data-i18n="category">
+                                    Category
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="productCategory"
+                                    placeholder="Accessories"
+                                    data-placeholder="categoryPlaceholder"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+
+                                <label data-i18n="buyingPrice">
+                                    Buying Price
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="buyPrice"
+                                    min="0"
+                                    step="0.01"
+                                    placeholder="800"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label data-i18n="sellingPrice">
+                                    Selling Price
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="sellPrice"
+                                    min="0"
+                                    step="0.01"
+                                    placeholder="1500"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+
+                                <label data-i18n="quantity">
+                                    Quantity
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="productQuantity"
+                                    min="0"
+                                    step="1"
+                                    placeholder="20"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label data-i18n="minimumStock">
+                                    Minimum Stock
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="minimumStock"
+                                    min="0"
+                                    value="5"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+
+                        <button
+                            class="primary-button"
+                            id="productSubmitButton"
+                            type="submit"
+                        >
+
+                            + Add Product
+
+                        </button>
+
+
+                    </form>
+
+                </div>
+
+
+
+                <!-- PRODUCT LIST -->
+
+                <div class="card product-list-card">
+
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h2 data-i18n="storage">
+                                Storage
+                            </h2>
+
+                            <p data-i18n="currentInventory">
+                                Current inventory
+                            </p>
+
+                        </div>
+
+
+                        <span
+                            class="count-badge"
+                            id="productCount"
+                        >
+                            0
+                        </span>
+
+                    </div>
+
+
+
+                    <div class="search-box">
+
+                        <span>
+                            🔍
+                        </span>
+
+                        <input
+                            type="text"
+                            id="productSearch"
+                            placeholder="Search products..."
+                            data-placeholder="searchProducts"
+                        >
+
+                    </div>
+
+
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+
+                            <tr>
+
+                                <th data-i18n="product">
+                                    Product
+                                </th>
+
+                                <th data-i18n="code">
+                                    Code
+                                </th>
+
+                                <th data-i18n="category">
+                                    Category
+                                </th>
+
+                                <th data-i18n="sellingPrice">
+                                    Selling Price
+                                </th>
+
+                                <th data-i18n="stock">
+                                    Stock
+                                </th>
+
+                                <th data-i18n="status">
+                                    Status
+                                </th>
+
+                                <th data-i18n="action">
+                                    Action
+                                </th>
+
+                            </tr>
+
+                            </thead>
+
+
+                            <tbody
+                                id="productsTableBody"
+                            ></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             CASHIER / POS
+             ================================================= -->
+
+        <section
+            id="sales"
+            class="page"
+        >
+
+
+            <div class="cashier">
+
+
+                <!-- PRODUCTS -->
+
+                <div class="cashier-products">
+
+
+                    <div class="cashier-header">
+
+                        <div>
+
+                            <h2 data-i18n="cashier">
+                                Cashier
+                            </h2>
+
+                            <p data-i18n="selectProducts">
+                                Select products to add to the sale
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- SEARCH -->
+
+                    <div class="cashier-search">
+
+                        <span class="search-icon">
+                            🔍
+                        </span>
+
+                        <input
+                            type="text"
+                            id="cashierSearch"
+                            placeholder="Search product or scan code..."
+                            data-placeholder="cashierSearchPlaceholder"
+                            autocomplete="off"
+                        >
+
+                        <button
+                            id="clearCashierSearch"
+                            class="clear-search"
+                            type="button"
+                        >
+                            ×
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- CATEGORIES -->
+
+                    <div
+                        class="category-filter"
+                        id="categoryFilter"
+                    ></div>
+
+
+
+                    <!-- PRODUCT GRID -->
+
+                    <div
+                        id="cashierProductGrid"
+                        class="cashier-product-grid"
+                    ></div>
+
+
+                </div>
+
+
+
+                <!-- CART -->
+
+                <div class="cashier-cart">
+
+
+                    <div class="cart-header">
+
+                        <div>
+
+                            <h2 data-i18n="currentSale">
+                                Current Sale
+                            </h2>
+
+                            <span id="cartItemCount">
+                                0 items
+                            </span>
+
+                        </div>
+
+
+                        <button
+                            class="clear-cart"
+                            id="clearCart"
+                            type="button"
+                            data-i18n="clear"
+                        >
+                            Clear
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- CART -->
+
+                    <div
+                        id="cartItems"
+                        class="cart-items"
+                    ></div>
+
+
+
+                    <!-- SUMMARY -->
+
+                    <div class="cart-summary">
+
+
+                        <div class="summary-row">
+
+                            <span data-i18n="items">
+                                Items
+                            </span>
+
+                            <strong id="summaryItems">
+                                0
+                            </strong>
+
+                        </div>
+
+
+                        <div class="summary-row">
+
+                            <span data-i18n="subtotal">
+                                Subtotal
+                            </span>
+
+                            <strong id="summarySubtotal">
+                                Rs. 0.00
+                            </strong>
+
+                        </div>
+
+
+
+                        <div class="discount-row">
+
+                            <label data-i18n="discount">
+                                Discount
+                            </label>
+
+                            <div class="discount-input">
+
+                                <span>
+                                    Rs.
+                                </span>
+
+                                <input
+                                    type="number"
+                                    id="discountAmount"
+                                    min="0"
+                                    value="0"
+                                    step="0.01"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="grand-total">
+
+                            <span data-i18n="total">
+                                TOTAL
+                            </span>
+
+                            <strong id="grandTotal">
+                                Rs. 0.00
+                            </strong>
+
+                        </div>
+
+
+
+                        <!-- CASH -->
+
+                        <div class="cash-section">
+
+                            <label data-i18n="cashReceived">
+                                Cash Received
+                            </label>
+
+                            <div class="cash-input">
+
+                                <span>
+                                    Rs.
+                                </span>
+
+                                <input
+                                    type="number"
+                                    id="cashReceived"
+                                    min="0"
+                                    step="0.01"
+                                    placeholder="0.00"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- CHANGE -->
+
+                        <div class="change-row">
+
+                            <span data-i18n="change">
+                                Change
+                            </span>
+
+                            <strong id="changeAmount">
+                                Rs. 0.00
+                            </strong>
+
+                        </div>
+
+
+
+                        <button
+                            id="completeSale"
+                            class="complete-sale"
+                            type="button"
+                            data-i18n="completeSale"
+                        >
+
+                            ✓ Complete Sale
+
+                        </button>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SALES HISTORY
+             ================================================= -->
+
+        <section
+            id="history"
+            class="page"
+        >
+
+
+            <div class="card">
+
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2 data-i18n="salesHistory">
+                            Sales History
+                        </h2>
+
+                        <p data-i18n="completedTransactions">
+                            All completed transactions
+                        </p>
+
+                    </div>
+
+
+                    <div class="history-total">
+
+                        <span data-i18n="totalRevenue">
+                            Total Revenue
+                        </span>
+
+                        <strong id="historyRevenue">
+                            Rs. 0.00
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                        <tr>
+
+                            <th data-i18n="date">
+                                Date
+                            </th>
+
+                            <th data-i18n="product">
+                                Product
+                            </th>
+
+                            <th data-i18n="code">
+                                Code
+                            </th>
+
+                            <th data-i18n="quantity">
+                                Quantity
+                            </th>
+
+                            <th data-i18n="unitPrice">
+                                Unit Price
+                            </th>
+
+                            <th data-i18n="total">
+                                Total
+                            </th>
+
+                            <th data-i18n="action">
+                                Action
+                            </th>
+
+                        </tr>
+
+                        </thead>
+
+
+                        <tbody
+                            id="salesTableBody"
+                        ></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+
+<!-- =====================================================
+     TOAST
+     ===================================================== -->
+
+<div
+    id="toast"
+    class="toast"
+></div>
+
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
